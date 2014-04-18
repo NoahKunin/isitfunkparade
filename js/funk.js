@@ -14,6 +14,6 @@ $win.resize(getWidth).mousemove(function(e) {
         150
     ];
 
-    $(document.body).css('background','rgb('+rgb.join(',')+')');
+    $("#answer").css('color','rgb('+rgb.join(',')+')');
 
 }).resize();
