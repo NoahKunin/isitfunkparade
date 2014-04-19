@@ -15,5 +15,6 @@ $win.resize(getWidth).mousemove(function(e) {
     ];
 
     $("#answer").css('color','rgb('+rgb.join(',')+')');
+    $("#answer").css('text-shadow:color','rgb('+rgb.join(',')+')');
 
 }).resize();
