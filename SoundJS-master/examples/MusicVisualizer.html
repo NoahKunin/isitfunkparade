@@ -60,7 +60,7 @@
         var centerX, centerY;   // variables to hold the center point, so that tick is quicker
         var messageField;       // Message display field
         var assetsPath = "assets/"; // Create a single item to load.
-        var src = assetsPath + "05-Binrpilot-Underground.mp3";  // set up our source
+        var src = "http://funkparade.com/wp-content/themes/twentyfourteen/html5video/how-to-start-a-band.mp3";  // set up our source
         var soundInstance;      // the sound instance we create
         var analyserNode;       // the analyser node that allows us to visualize the audio
         var freqFloatData, freqByteData, timeByteData;  // arrays to retrieve data from analyserNode
@@ -92,7 +92,7 @@
             // calculate the center point, so we only have to do this math once (quicker)
             centerX = w >> 1;
             centerY = h >> 1;
-            
+
             // a message on our stage that we use to let the user know what is going on.  Useful when preloading.
             messageField = new createjs.Text("Loading Audio", "bold 24px Arial", "#FFFFFF");
             messageField.maxWidth = w;
@@ -147,7 +147,7 @@
             stage.removeEventListener("stagemousedown", startPlayback);
 
             if(soundInstance) {return;} // if this is defined, we've already started playing.  This is very unlikely to happen.
-			
+
             // we're starting, so we can remove the message
             stage.removeChild(messageField);
 
@@ -167,7 +167,7 @@
                 circle.compositeOperation = "lighter";
                 stage.addChild(circle);
             }
-            
+
             // add waves container to stage
             stage.addChild(waves);
 
@@ -226,10 +226,10 @@
 				wave.x = centerX;
 				wave.y = centerY;
 				wave.regX = wave.regY = WAVE_RADIUS;
-				
+
 				// set the expansion speed as a factor of the value difference:
                 wave.speed = dataDiff*0.1+1;
-                
+
                 // set the initial scale:
                 wave.scaleX = wave.scaleY = lastRadius/WAVE_RADIUS;
 
@@ -252,23 +252,23 @@
             // draw the updates to stage
             stage.update();
         }
-        
+
         function getWaveImg(thickness) {
         	// floor the thickness so we only have to deal with integer values:
         	thickness |= 0;
         	if (thickness < 1) { return null; }
-        	
+
         	// if we already have an image with the right thickness, return it:
         	if (waveImgs[thickness]) { return waveImgs[thickness]; }
-        	
+
         	// otherwise, draw the wave into a Shape instance:
         	var waveShape = new createjs.Shape();
 			waveShape.graphics.setStrokeStyle(thickness).beginStroke ("#FFF").drawCircle(0,0,WAVE_RADIUS);
-			
+
 			// cache it to create a bitmap version of the shape:
 			var r = WAVE_RADIUS+thickness;
 			waveShape.cache(-r, -r, r*2, r*2);
-			
+
 			// save the image into our list, and return it:
 			waveImgs[thickness] = waveShape.cacheCanvas
 			return waveShape.cacheCanvas;
